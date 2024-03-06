@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profilepage extends StatelessWidget {
   //final String title;
-  final String emailAddress;
 
-  const Profilepage({super.key, required this.emailAddress});
+  Profilepage({
+    super.key,
+  });
+
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class Profilepage extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 248, 81, 31),
         title: Text('Profile Page'),
       ),
-      body: SingleChildScrollView(  
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -31,7 +35,7 @@ class Profilepage extends StatelessWidget {
               child: Row(
                 children: const [
                   Padding(
-                    padding: EdgeInsets.only(left:20),
+                    padding: EdgeInsets.only(left: 20),
                     child: CircleAvatar(
                       maxRadius: 50,
                       minRadius: 50,
@@ -48,13 +52,13 @@ class Profilepage extends StatelessWidget {
                     children: [
                       Text(
                         'Sundhar C M',
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'B.E Computer Science and Technology',
-                        style:
-                            TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                     ],
                   )
@@ -97,9 +101,11 @@ class Profilepage extends StatelessWidget {
                 ],
               ),
             ),
-            ProfileDown(colTitle: 'Email Address', colValue: emailAddress),
+            ProfileDown(
+                colTitle: 'Email Address', colValue: user!.email.toString()),
             ProfileDown(colTitle: 'Phone Number', colValue: '9876543210'),
-            ProfileDown(colTitle: 'Personal Email Address', colValue: 'xyz@gmail.com'),
+            ProfileDown(
+                colTitle: 'Personal Email Address', colValue: 'xyz@gmail.com'),
           ],
         ),
       ),
@@ -117,7 +123,7 @@ class ProfileData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(right: 5, left: 5, top: 10, bottom: 10),
-      width: MediaQuery.of(context).size.width /2.1,
+      width: MediaQuery.of(context).size.width / 2.1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,7 +160,8 @@ class ProfileData extends StatelessWidget {
 }
 
 class ProfileDown extends StatelessWidget {
-  const ProfileDown({super.key, required this.colTitle, required this.colValue});
+  const ProfileDown(
+      {super.key, required this.colTitle, required this.colValue});
 
   final String colTitle;
   final String colValue;
@@ -162,37 +169,37 @@ class ProfileDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      colTitle,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(colValue),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      child: Divider(
-                        thickness: 1,
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                colTitle,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(colValue),
+              SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 1.1,
+                child: Divider(
+                  thickness: 1,
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

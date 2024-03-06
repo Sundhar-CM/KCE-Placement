@@ -4,15 +4,16 @@ import 'package:demo_apllication/Pages/companies_page.dart';
 import 'package:demo_apllication/Pages/drive_page.dart';
 import 'package:demo_apllication/Pages/profile_page.dart';
 import 'package:demo_apllication/Pages/test_page.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:demo_apllication/firebaseAuth/login_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
-  const SideBar({super.key, required this.emailAddress});
+  SideBar({
+    super.key,
+  });
 
-  final String emailAddress;
-
-  //final user=FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,8 +27,7 @@ class SideBar extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               accountEmail: Text(
-                //user.email!,
-                emailAddress,
+                user.email!,
                 style: TextStyle(color: Colors.black),
               ),
               currentAccountPicture: CircleAvatar(
@@ -44,7 +44,7 @@ class SideBar extends StatelessWidget {
             onTap: () => {
               Navigator.pop(context),
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  Profilepage(emailAddress: emailAddress,)))
+                  MaterialPageRoute(builder: (context) => Profilepage()))
             },
           ),
           Divider(),
@@ -75,6 +75,16 @@ class SideBar extends StatelessWidget {
               Navigator.pop(context),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const TestPage()))
+            },
+          ),
+          Divider(),
+          ListTile(
+            title: Text('Logout'),
+            leading: Icon(Icons.logout_outlined),
+            onTap: () => {
+              FirebaseAuth.instance.signOut(),
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => LoginAuth()))
             },
           ),
         ],

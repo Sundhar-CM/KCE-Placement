@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 //import 'package:demo_apllication/firebaseAuth/login_auth.dart';
+import 'package:demo_apllication/firebaseAuth/login_auth.dart';
 import 'package:demo_apllication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => (LoginPage()),
+        builder: (_) => (LoginAuth()),
       ));
     });
   }
@@ -59,4 +60,3 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
-

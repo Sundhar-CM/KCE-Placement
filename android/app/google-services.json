@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "953953820511",
-    "project_id": "dem-app-kce",
-    "storage_bucket": "dem-app-kce.appspot.com"
+    "project_number": "730525670370",
+    "firebase_url": "https://placement-kce-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "placement-kce",
+    "storage_bucket": "placement-kce.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:953953820511:android:5d7f460cb3ee35ef5da0ea",
+        "mobilesdk_app_id": "1:730525670370:android:8254d1d392df2ad211b7bb",
         "android_client_info": {
           "package_name": "com.example.demo_apllication"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAKY7IX_HeWIAMdN-S6mnczdpLQPv-UVn0"
+          "current_key": "AIzaSyB3fOF6c69CcpXO_UC5SVh_NEV35pfdgq4"
         }
       ],
       "services": {

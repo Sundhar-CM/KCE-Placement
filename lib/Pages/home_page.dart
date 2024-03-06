@@ -5,31 +5,32 @@ import 'package:demo_apllication/Pages/drive_page.dart';
 import 'package:demo_apllication/Pages/profile_page.dart';
 import 'package:demo_apllication/drawer/side_bar.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser!;
   final String emailAddress;
-  PlatformFile?pickedFile;
+  PlatformFile? pickedFile;
   String? _fileName;
 
   HomePage({super.key, required this.emailAddress});
-  Future selectFile() async{
-
-    final result=await FilePicker.platform.pickFiles(
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       allowedExtensions: ['pdf'],
     );
-    if(result==null) return;
-    _fileName=result.files.first.name;
-    pickedFile=result.files.first;
+    if (result == null) return;
+    _fileName = result.files.first.name;
+    pickedFile = result.files.first;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(emailAddress: emailAddress),
+      drawer: SideBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         flexibleSpace: Container(
@@ -45,10 +46,8 @@ class HomePage extends StatelessWidget {
             width: 60,
             child: GestureDetector(
               onTap: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  Profilepage(emailAddress: emailAddress,)))
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Profilepage()))
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(60),
@@ -69,24 +68,26 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             Container(
-                child: Text('Hello Student!',
+              child: Text(
+                'Hello Student!',
                 style: GoogleFonts.lobster(
                   fontSize: 30,
                   color: Color.fromARGB(255, 202, 55, 11),
                   fontWeight: FontWeight.w500,
                 ),
-                ),
               ),
-              Container(
-                alignment: Alignment.center,
-                child: Text('Get your Complete Details of Placement ',
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                'Get your Complete Details of Placement ',
                 style: GoogleFonts.lexend(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                 ),
-                ),
               ),
-              SizedBox(
+            ),
+            SizedBox(
               height: 30,
             ),
             Row(
@@ -94,15 +95,16 @@ class HomePage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const DrivePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DrivePage()));
                   },
                   child: Container(
                     padding: EdgeInsets.all(25),
                     decoration: BoxDecoration(
                       color: Color.fromARGB(111, 240, 224, 212),
                       borderRadius: BorderRadius.circular(20),
-                      
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,8 +129,10 @@ class HomePage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CompanyPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CompanyPage()));
                   },
                   child: Container(
                     padding: EdgeInsets.all(25),
@@ -148,44 +152,45 @@ class HomePage extends StatelessWidget {
                         ),
                         Text(
                           'Companies',
-                          style: TextStyle(
-                            fontSize: 20
-                          ),
+                          style: TextStyle(fontSize: 20),
                         ),
-                        Text('  List of Companies ',),
+                        Text(
+                          '  List of Companies ',
+                        ),
                       ],
                     ),
                   ),
                 )
               ],
             ),
-            SizedBox(height: 20,),
-            Padding(padding: EdgeInsets.only(left: 10),
-            child: Text('Update Your Resume',
-            style: GoogleFonts.catamaran(
-              fontSize: 20,
-              fontWeight: FontWeight.w600
+            SizedBox(
+              height: 20,
             ),
-            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                'Update Your Resume',
+                style: GoogleFonts.catamaran(
+                    fontSize: 20, fontWeight: FontWeight.w600),
+              ),
             ),
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
-               child: Image.asset(
-                      'img/resume.png',
-                      height: 300,
-                    ),
+              child: Image.asset(
+                'img/resume.png',
+                height: 300,
+              ),
             ),
             Center(
-              child: ElevatedButton(onPressed: selectFile,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepOrange
-              ), 
-              child: Text('Select',
-              style: TextStyle(
-                color: Colors.white
-              ),
-              ),
+              child: ElevatedButton(
+                onPressed: selectFile,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrange),
+                child: Text(
+                  'Select',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           ],
