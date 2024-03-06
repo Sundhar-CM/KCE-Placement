@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:demo_apllication/Pages/home_page.dart';
+import 'package:demo_apllication/firebaseAuth/login_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,19 +18,47 @@ class _LoginPageState extends State<LoginPage> {
   final _emailControl = TextEditingController();
   final _passwordControl = TextEditingController();
 
-  // Future signIn() async {
-  //   await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //     email: _emailControl.text.trim(),
-  //     password: _passwordControl.text.trim()
-  //   );
-  // }
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailControl.text, password: _passwordControl.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        wrongEmail();
+      } else if (e.code == 'wrong-password') {
+        wrongPassword();
+      }
+    }
+  }
 
-  // @override
-  // void dispose() {
-  //   _emailControl.dispose();
-  //   _passwordControl.dispose();
-  //   super.dispose();
-  // }
+  void wrongEmail() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Incorrect Email'),
+        );
+      },
+    );
+  }
+
+  void wrongPassword() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Incorrect Password'),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailControl.dispose();
+    _passwordControl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +135,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () => {
-                    //signIn(),
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                  emailAddress: _emailControl.text,
-                                )))
+                    signIn(),
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) => LoginAuth()))
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 70),
