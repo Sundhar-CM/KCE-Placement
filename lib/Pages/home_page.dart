@@ -50,9 +50,9 @@ class HomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Profilepage()))
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(60),
+                borderRadius: BorderRadius.circular(50),
                 child: Image.asset(
-                  'img/profile.jpeg',
+                  'img/profile-158.jpg',
                 ),
               ),
             ),

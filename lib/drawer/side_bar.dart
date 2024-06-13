@@ -31,7 +31,7 @@ class SideBar extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               currentAccountPicture: CircleAvatar(
-                foregroundImage: AssetImage('img/profile.jpeg'),
+                foregroundImage: AssetImage('img/profile-158.jpg'),
               ),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 248, 81, 31),

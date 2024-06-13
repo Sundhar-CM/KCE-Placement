@@ -41,7 +41,7 @@ class Profilepage extends StatelessWidget {
                       maxRadius: 50,
                       minRadius: 50,
                       backgroundColor: Colors.orange,
-                      backgroundImage: AssetImage('img/profile.jpeg'),
+                      backgroundImage: AssetImage('img/profile-158.jpg'),
                     ),
                   ),
                   SizedBox(
